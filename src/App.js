@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import * as ROUTES from "./constants/routes";
+import { Home, SignIn, SignUp, Browse } from "./pages";
+import { ForwardingRoute, ProtectedRoute } from "./helpers/specialRoutes";
+import { useAuthListener } from "./hooks";
 
-function App() {
+export default function App() {
+  const { user } = useAuthListener();
+
+  // Do things with the user info
+  // const displayInfo = user
+  //   ? `user: ${user.displayName}, avatar: ${user.photoURL}`
+  //   : "no user logged in";
+  // console.log(displayInfo);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Route exact path={ROUTES.HOME}>
+        <Home />
+      </Route>
+
+      <ProtectedRoute
+        user={user}
+        fallbackPath={ROUTES.SIGN_IN}
+        path={ROUTES.BROWSE}
+        exact
+      >
+        <Browse />
+      </ProtectedRoute>
+
+      <ForwardingRoute
+        user={user}
+        targetPath={ROUTES.BROWSE}
+        path={ROUTES.SIGN_IN}
+        exact
+      >
+        <SignIn />
+      </ForwardingRoute>
+
+      <ForwardingRoute
+        user={user}
+        targetPath={ROUTES.BROWSE}
+        path={ROUTES.SIGN_UP}
+        exact
+      >
+        <SignUp />
+      </ForwardingRoute>
+    </Router>
   );
 }
 
-export default App;
+// export default App;
