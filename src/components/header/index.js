@@ -1,6 +1,6 @@
 import {
   Container,
-  Inner,
+  Head,
   Logo,
   ButtonLink,
   Body,
@@ -13,8 +13,8 @@ const Header = ({ children, ...restProps }) => {
   return <Container {...restProps}>{children}</Container>;
 };
 
-Header.Inner = ({ children }) => {
-  return <Inner>{children}</Inner>;
+Header.Head = ({ children }) => {
+  return <Head>{children}</Head>;
 };
 
 Header.Logo = ({ to, ...props }) => {

@@ -3,11 +3,17 @@ import { FooterContainer } from "../containers/FooterContainer";
 import { AccordionContainer } from "../containers/AccordionContainer";
 import { HeaderContainer } from "../containers/HeaderContainer";
 import { Header, CtaForm } from "../components";
+import logo from "../logo.svg";
+import * as ROUTES from "../constants/routes";
 
 const Home = () => {
   return (
     <>
       <HeaderContainer bg="home-bg.jpg" dim>
+        <Header.Head>
+          <Header.Logo src={logo} alt="netflix logo" to={ROUTES.HOME} />
+          <Header.ButtonLink to={ROUTES.SIGN_IN}>Sign in</Header.ButtonLink>
+        </Header.Head>
         <Header.Body>
           <Header.Heading>Unlimited movies, TV shows and more.</Header.Heading>
           <Header.SubHeading>

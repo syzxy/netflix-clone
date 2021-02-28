@@ -19,7 +19,7 @@ export const Container = styled.div`
   }};
 `;
 
-export const Inner = styled.div`
+export const Head = styled.div`
   max-width: 1920px;
   padding-top: 20px;
   display: flex;
